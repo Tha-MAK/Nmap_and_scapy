@@ -39,6 +39,18 @@ nmap -sn 10.6.6.0/24
 
 ---
 
+### 3.2 Port Scanning
+
+```bash
+nmap 10.6.6.23
+```
+
+**What it does:** Execute a default port scan on the target host. 
+
+**Observed outcome:** Open ports are listed (21, 22, 53, 80, 139, and 445).
+
+---
+
 ### 3.2 OS fingerprinting
 
 ```bash
