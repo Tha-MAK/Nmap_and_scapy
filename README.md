@@ -27,7 +27,7 @@ All activity was performed in a controlled internal environment against a single
 
 ## 3) Nmap Exercises
 
-### 3.1 Host discovery (ping sweep)
+### 3.1 Host Discovery (Ping Sweep)
 
 ```bash
 nmap -sn 10.6.6.0/24
@@ -51,7 +51,7 @@ nmap 10.6.6.23
 
 ---
 
-### 3.2 OS fingerprinting
+### 3.3 OS Fingerprinting
 
 ```bash
 sudo nmap -O 10.6.6.23
@@ -63,10 +63,22 @@ sudo nmap -O 10.6.6.23
 
 ---
 
-### 3.3 FTP service and version detection
+### 3.4 Service Detection (FTP)
 
 ```bash
-nmap -p21 -sV -A -T4 10.6.6.23
+nmap -v -p21 -sV -T4 10.6.6.23
+```
+
+**What it does:** Provide additional information about the services running on the open port 21 (FTP service).
+
+**Observed outcome:** Lists the version of FTP running on the computer as vsftpd 3.0.3.
+
+---
+
+### 3.5 FTP Service & Version Detection
+
+```bash
+nmap -p21 -sV -A 10.6.6.23
 ```
 
 **What it does:** Checks port 21, identifies the service/version, and runs additional detection (-A).
@@ -75,7 +87,31 @@ nmap -p21 -sV -A -T4 10.6.6.23
 
 ---
 
-### 3.4 SMB share enumeration (port 445)
+### 3.6 Investigate SMB Services
+
+```bash
+nmap -A -p139,445 10.6.6.23
+```
+
+**What it does:** Find more information on these ports.
+
+**Observed outcome:** Computer name assigned to the target host is gravemind.
+
+---
+
+### 3.7 SMB Discovery Scripts (ports 139 & 445)
+
+```bash
+nmap --script smb-enum-users.nse -p139,445 10.6.6.23
+```
+
+**What it does:** Uses an NSE script to list SMB usernames on the target host.
+
+**Observed outcome:** Two usernames were returned, arbiter and masterchief.
+
+---
+
+### 3.8 SMB Share Enumeration (port 445)
 
 ```bash
 nmap --script smb-enum-shares.nse -p445 10.6.6.23
@@ -87,7 +123,7 @@ nmap --script smb-enum-shares.nse -p445 10.6.6.23
 
 ---
 
-### 3.5 Manual SMB check (anonymous)
+### 3.9 Manual SMB Check (Anonymous)
 
 ```bash
 smbclient //10.6.6.23/print$ -N
@@ -96,6 +132,7 @@ smbclient //10.6.6.23/print$ -N
 **What it does:** Tests SMB access without credentials (`-N`), to confirm whether guest/anonymous access is allowed.
 
 **Observed outcome:** Anonymous connection succeeded, which could represent a security weakness depending on configuration.
+
 Exit with:
 
 ```bash
