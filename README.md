@@ -30,7 +30,7 @@ All activity was performed in a controlled internal environment against a single
 nmap -sn 10.6.6.0/24
 ```
 
-**What it does:** Scans the subnet to identify which IPs respond as “up.”
+**What it does:** Scans the subnet to identify which IPs respond as “up.” 
 **Observed outcome:** `10.6.6.23` responded and was listed as reachable.
 
 ---
@@ -41,8 +41,8 @@ nmap -sn 10.6.6.0/24
 sudo nmap -O 10.6.6.23
 ```
 
-**What it does:** Attempts to infer the target OS using TCP/IP fingerprint behavior.
-**Observed outcome:** Nmap returned an OS “best guess” based on fingerprints.
+**What it does:** Attempts to infer the target OS using TCP/IP fingerprint behavior. 
+**Observed outcome:** Nmap returned an OS “Linux 4.15 - 5.8".
 
 ---
 
