@@ -163,7 +163,7 @@ sniff()
 **How traffic was generated:** From another terminal:
 
 ```bash
-ping cisco.com
+ping -c 5 www.cisco.com
 ```
 
 **Observed outcome:** Packets such as ICMP and DNS were captured.
@@ -202,7 +202,7 @@ a.summary()
 ### 4.4 Capture only ICMP packets (limited count)
 
 ```python
-sniff(iface="br-internal", filter="icmp", count=5)
+sniff(iface="br-internal", filter="icmp", count=10)
 ```
 
 **Test traffic:**
@@ -211,13 +211,13 @@ sniff(iface="br-internal", filter="icmp", count=5)
 ping 10.6.6.23
 ```
 
-**Observed outcome:** Exactly 5 ICMP packets were captured (as requested by `count=5`).
+**Observed outcome:** Exactly 10 ICMP packets were captured (as requested by `count=10`).
 
 Inspect:
 
 ```python
 a = _
-a.summary()
+a.nsummary()
 a[3]
 ```
 
